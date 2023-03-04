@@ -1,0 +1,62 @@
+
+<!-- this below link is for the scss folder home.scss file its css styling is in that file pls go and visit-->
+<link rel="stylesheet" href="/css/home.css">
+
+
+<h1>
+    Codeial / <%= title %> page
+</h1>
+
+<div id="home-container">
+            <section id="feed-posts">
+                <h4>Posts</h4>
+            
+                <!-- here locals is just an object if we keep only user we cannot fetch it throuws an error user is not found by this way we can restrict the user,by this we can restrict that only signed in user can post  -->
+                <% if(locals.user){ %>
+                <form action="/posts/create" id="new-post-form" method="POST">
+                    <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required>
+                    </textarea>
+                    <input type="submit" value="Post">
+                </form>
+                <% } %>
+            
+            
+                            <!-- for destroying i.e deletin post -->
+            
+            
+            <div id="posts-list-container">
+                <ul>
+                    <% for(post of posts){ %> 
+                        
+                        <%- include('_post')-%>
+                        
+                    <%}%>   
+                </ul>
+            
+            </div>
+            </section>
+
+
+
+    <!-- showing all the users -->
+
+
+
+            <section id="user-friends">
+                <!-- this is just an title -->
+            <h4>Friends</h4>
+            <% for(u of all_users){%>
+                    <!-- this p tag displays name of the user  which is link to the profile of the user -->
+                <p>
+                    
+                    <!-- here we need to display the users profile which has been asked in this id -->
+                    <!-- this below line makes us to print the users  in the home page -->
+                    <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+                </p>
+            <% } %>
+            </section>
+    
+</div>
+
+
+
